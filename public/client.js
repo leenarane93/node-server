@@ -117,7 +117,12 @@ function showVideoConference() {
 async function setLocalStream(mediaConstraints) {
   let stream
   try {
-    stream = await navigator.mediaDevices.getUserMedia(mediaConstraints)
+    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
+      stream = await navigator.mediaDevices.getUserMedia(mediaConstraints)
+    }
+    else{
+      console.error('Media Device not found')
+    }
   } catch (error) {
     console.error('Could not get user media', error)
   }
