@@ -117,7 +117,7 @@ function showVideoConference() {
 async function setLocalStream(mediaConstraints) {
   let stream
   try {
-    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
+    if(navigator.mediaDevices || navigator.mediaDevices.getUserMedia){
       stream = await navigator.mediaDevices.getUserMedia(mediaConstraints)
     }
     else{
