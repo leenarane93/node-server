@@ -5,6 +5,10 @@ const io = require('socket.io')(server)
 
 app.use('/', express.static('public'))
 
+// let app = require('express')();
+// let http = require('http').Server(app);
+// let io = require('socket.io')(http);
+
 io.on('connection', (socket) => {
   socket.on('join', (roomId) => {
     const selectedRoom = io.sockets.adapter.rooms[roomId]
@@ -12,15 +16,16 @@ io.on('connection', (socket) => {
 
     // These events are emitted only to the sender socket.
     if (numberOfClients == 0) {
-      console.log(`Creating room ${roomId} and emitting room_created socket event`)
+      //console.log(`Creating room ${roomId} and emitting room_created socket event`)
+      alert('Creating room '+roomId+'and emitting room_created socket event')
       socket.join(roomId)
       socket.emit('room_created', roomId)
     } else if (numberOfClients == 1) {
-      console.log(`Joining room ${roomId} and emitting room_joined socket event`)
+      alert('joining room '+roomId+'and emitting room_created socket event')
       socket.join(roomId)
       socket.emit('room_joined', roomId)
     } else {
-      console.log(`Can't join room ${roomId}, emitting full_room socket event`)
+      alert(`Can't join room ${roomId}, emitting full_room socket event`)
       socket.emit('full_room', roomId)
     }
   })
@@ -47,5 +52,5 @@ io.on('connection', (socket) => {
 // START THE SERVER =================================================================
 const port = process.env.PORT || 3000
 server.listen(port, () => {
-  console.log(`Express server listening on port ${port}`)
+  alert(`Express server listening on port ${port}`)
 })

@@ -37,27 +37,27 @@ connectButton.addEventListener('click', () => {
 
 // SOCKET EVENT CALLBACKS =====================================================
 socket.on('room_created', async () => {
-  console.log('Socket event callback: room_created')
+  alert('Socket event callback: room_created')
 
   await setLocalStream(mediaConstraints)
   isRoomCreator = true
 })
 
 socket.on('room_joined', async () => {
-  console.log('Socket event callback: room_joined')
+  alert('Socket event callback: room_joined')
 
   await setLocalStream(mediaConstraints)
   socket.emit('start_call', roomId)
 })
 
 socket.on('full_room', () => {
-  console.log('Socket event callback: full_room')
+  alert('Socket event callback: full_room')
 
   alert('The room is full, please try another one')
 })
 
 socket.on('start_call', async () => {
-  console.log('Socket event callback: start_call')
+  alert('Socket event callback: start_call')
 
   if (isRoomCreator) {
     rtcPeerConnection = new RTCPeerConnection(iceServers)
