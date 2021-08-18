@@ -30,9 +30,25 @@ const iceServers = {
   ],
 }
 
+function connect(){
+  var connection = new RTCMultiConnection();
+
+// this line is VERY_important
+connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+
+// if you want audio+video conferencing
+connection.session = {
+    audio: true,
+    video: true
+};
+
+connection.openOrJoin(roomInput.value);
+}
+
 // BUTTON LISTENER ============================================================
 connectButton.addEventListener('click', () => {
-  joinRoom(roomInput.value)
+  //joinRoom(roomInput.value)
+  connect();
 })
 
 // SOCKET EVENT CALLBACKS =====================================================
